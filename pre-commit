@@ -1,30 +1,37 @@
 #!/bin/bash
 # PHP CodeSniffer pre-commit hook for git
-#
-# @author Soenke Ruempler <soenke@ruempler.eu>
-# @author Sebastian Kaspari <s.kaspari@googlemail.com>
-#
-# see the README
 
+# VARIABLES
 PHPCS_BIN=$(which phpcs)
 PHPCS_CODING_STANDARD=Magento
-PHPCS_IGNORE=
+
+# Egrep compatible pattern of files to be checked
 PHPCS_FILE_PATTERN="\.(php|phtml)$"
+
+# Comma-separated list of file patterns being ignored
+PHPCS_IGNORE=
+
+# Comma-seperated list of sniffs from the standard that should be used
+# Use `phpcs --standard=PSR1 -e` to list sniffs for your standard
+PHPCS_SNIFFS=
+
+# Ignore warnings
+PHPCS_IGNORE_WARNINGS=1
+
+# Encoding
+PHPCS_ENCODING=utf-8
+
+# Temp staging folder
 TMP_STAGING=".tmp_staging"
 
-# parse config
-CONFIG_FILE=$(dirname $0)/config
-if [ -e $CONFIG_FILE ]; then
-    . $CONFIG_FILE
-fi
-
-# simple check if code sniffer is set up correctly
+# START
+# Simple check if code sniffer is set up correctly
 if [ ! -x $PHPCS_BIN ]; then
     echo "PHP CodeSniffer bin not found or executable -> $PHPCS_BIN"
     exit 1
 fi
 
-# stolen from template file
+# Stolen from template file
 if git rev-parse --verify HEAD
 then
     against=HEAD
@@ -33,8 +40,8 @@ else
     against=4b825dc642cb6eb9a060e54bf8d69288fbee4904
 fi
 
-# this is the magic:
-# retrieve all files in staging area that are added, modified or renamed
+# This is the magic:
+# Retrieve all files in staging area that are added, modified or renamed
 # but no deletions etc
 FILES=$(git diff-index --name-only --cached --diff-filter=ACMR $against -- )
 
@@ -42,13 +49,13 @@ if [ "$FILES" == "" ]; then
     exit 0
 fi
 
-# create temporary copy of staging area
+# Create temporary copy of staging area
 if [ -e $TMP_STAGING ]; then
     rm -rf $TMP_STAGING
 fi
 mkdir $TMP_STAGING
 
-# match files against whitelist
+# Match files against whitelist
 FILES_TO_CHECK=""
 for FILE in $FILES
 do
@@ -64,7 +71,7 @@ if [ "$FILES_TO_CHECK" == "" ]; then
     exit 0
 fi
 
-# execute the code sniffer
+# Execute the code sniffer
 if [ "$PHPCS_IGNORE" != "" ]; then
     IGNORE="--ignore=$PHPCS_IGNORE"
 else
@@ -97,7 +104,7 @@ for FILE in $FILES_TO_CHECK
 do
   ID=$(git diff-index --cached $against $FILE | cut -d " " -f4)
 
-  # create staged version of file in temporary staging area with the same
+  # Create staged version of file in temporary staging area with the same
   # path as the original file so that the phpcs ignore filters can be applied
   mkdir -p "$TMP_STAGING/$(dirname $FILE)"
   git cat-file blob $ID > "$TMP_STAGING/$FILE"
@@ -107,7 +114,7 @@ done
 OUTPUT=$($PHPCS_BIN -s $IGNORE_WARNINGS --standard=$PHPCS_CODING_STANDARD $ENCODING $IGNORE $SNIFFS $STAGED_FILES)
 RETVAL=$?
 
-# delete temporary copy of staging area
+# Delete temporary copy of staging area
 rm -rf $TMP_STAGING
 
 if [ $RETVAL -ne 0 ]; then
