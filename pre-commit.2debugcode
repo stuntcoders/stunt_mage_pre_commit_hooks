@@ -6,8 +6,9 @@ FORBIDDENS=('var_dump' 'Zend_Debug' 'console.log')
 
 for FORBIDDEN in ${FORBIDDENS[@]}; do
 	git diff-index --cached --name-only HEAD | \
-		grep -E $FILES_PATTERN | \
-		GREP_COLOR='4;5;37;41' xargs grep --color --with-filename -n $FORBIDDEN && echo "Commit Rejected! Found ($FORBIDDEN) references. Please remove them before commiting" && exit 1
+	grep -E '\.(php|phtml|js)(\..+)?$' | \
+	xargs grep --color --with-filename -n 'Zend_Debug' | \
+	awk '{print "Debug call detected: " $1 " -- " $2}' && exit 1
 done
 
 exit 0
