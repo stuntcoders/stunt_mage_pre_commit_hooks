@@ -7,7 +7,7 @@
 # Exit on error
 set -eu
 
-declare -a FILE_PATTERNS=('app/code/core' 'app/Mage.php$' '^index.php$')
+declare -a FILE_PATTERNS=('app/code/core' 'app/Mage.php$' '^index.php$' 'lib/Zend' 'lib/Mage' 'app/design/frontend/base' 'app/design/adminhtml/base' 'skin/frontend/base' 'shell/')
 
 EXIT_STATUS=0
 while read FILE; do
