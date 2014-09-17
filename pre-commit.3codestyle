@@ -8,10 +8,6 @@ PHPCS_CODING_STANDARD=Magento
 # Egrep compatible pattern of files to be checked
 PHPCS_FILE_PATTERN="\.(php|phtml)$"
 
-# Comma-seperated list of sniffs from the standard that should be used
-# Use `phpcs --standard=PSR1 -e` to list sniffs for your standard
-PHPCS_SNIFFS=
-
 # Ignore warnings
 PHPCS_IGNORE_WARNINGS=1
 
