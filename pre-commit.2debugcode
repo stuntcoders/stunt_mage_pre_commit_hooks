@@ -4,11 +4,16 @@
 FILES_PATTERN='\.(php|phtml|js)(\..+)?$'
 FORBIDDENS=('var_dump' 'Zend_Debug' 'console.log')
 
+RETURN_VAL=0
 for FORBIDDEN in ${FORBIDDENS[@]}; do
-	git diff-index --cached --name-only HEAD | \
+	VAL=$(git diff-index --cached --name-only HEAD | \
 	grep -E '\.(php|phtml|js)(\..+)?$' | \
-	xargs grep --color --with-filename -n 'Zend_Debug' | \
-	awk '{print "Debug call detected: " $1 " -- " $2}' && exit 1
+	GREP_COLOR='4;5;37;41' xargs grep --color --with-filename -n $FORBIDDEN)
+
+	if [ "$VAL" != "" ]; then
+		echo "Debug call detected: $VAL"
+		RETURN_VAL=1
+	fi
 done
 
-exit 0
+exit $RETURN_VAL
