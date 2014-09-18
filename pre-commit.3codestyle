@@ -1,36 +1,25 @@
 #!/usr/bin/env bash
 
 # PHP CodeSniffer pre-commit hook for git
-# VARIABLES
+
+# Variables
 PHPCS_BIN=$(which phpcs)
 PHPCS_CODING_STANDARD=Magento
-
-# Egrep compatible pattern of files to be checked
+PHPCS_IGNORE_WARNINGS=1
+PHPCS_ENCODING=utf-8
 PHPCS_FILE_PATTERN="\.(php|phtml)$"
 
-# Ignore warnings
-PHPCS_IGNORE_WARNINGS=1
-
-# Encoding
-PHPCS_ENCODING=utf-8
-
-# START
-# Simple check if code sniffer is set up correctly
 if [ ! -x $PHPCS_BIN ]; then
 	echo "PHP CodeSniffer bin not found or executable -> $PHPCS_BIN"
 	exit 1
 fi
 
-# This is the magic:
-# Retrieve all files in staging area that are added, modified or renamed
-# but no deletions etc
 FILES=$(git diff-index --name-only --cached --diff-filter=ACMR HEAD -- )
 
 if [ "$FILES" == "" ]; then
 	exit 0
 fi
 
-# Match files against whitelist
 FILES_TO_CHECK=""
 for FILE in $FILES
 do
@@ -45,7 +34,6 @@ if [ "$FILES_TO_CHECK" == "" ]; then
 	exit 0
 fi
 
-# Execute the code sniffer
 OUTPUT=$($PHPCS_BIN -s --standard=$PHPCS_CODING_STANDARD --encoding=utf-8 $FILES_TO_CHECK)
 RETVAL=$?
 

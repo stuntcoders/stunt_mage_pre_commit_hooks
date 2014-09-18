@@ -1,10 +1,7 @@
 #!/usr/bin/env bash
 
-##############################################################################
-# This is a very slight modification of Drew Hunter's (@ddh__)
-# gist https://gist.github.com/drewhunter/8037753
-##############################################################################
-# Exit on error
+# Check if Magento core file were changed
+
 set -eu
 
 declare -a FILE_PATTERNS=('app/code/core' 'app/Mage.php$' '^index.php$' 'lib/Zend' 'lib/Mage' 'app/design/frontend/base' 'app/design/adminhtml/base' 'skin/frontend/base' 'shell/')
