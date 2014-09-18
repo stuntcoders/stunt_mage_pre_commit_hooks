@@ -14,13 +14,11 @@ PHPCS_IGNORE_WARNINGS=1
 # Encoding
 PHPCS_ENCODING=utf-8
 
-
-
 # START
 # Simple check if code sniffer is set up correctly
 if [ ! -x $PHPCS_BIN ]; then
-    echo "PHP CodeSniffer bin not found or executable -> $PHPCS_BIN"
-    exit 1
+	echo "PHP CodeSniffer bin not found or executable -> $PHPCS_BIN"
+	exit 1
 fi
 
 # This is the magic:
@@ -29,22 +27,22 @@ fi
 FILES=$(git diff-index --name-only --cached --diff-filter=ACMR HEAD -- )
 
 if [ "$FILES" == "" ]; then
-    exit 0
+	exit 0
 fi
 
 # Match files against whitelist
 FILES_TO_CHECK=""
 for FILE in $FILES
 do
-    RETVAL=$?
-    if [ "$RETVAL" -eq "0" ]
-    then
-        FILES_TO_CHECK="$FILES_TO_CHECK $FILE"
-    fi
+	RETVAL=$?
+	if [ "$RETVAL" -eq "0" ]
+	then
+		FILES_TO_CHECK="$FILES_TO_CHECK $FILE"
+	fi
 done
 
 if [ "$FILES_TO_CHECK" == "" ]; then
-    exit 0
+	exit 0
 fi
 
 # Execute the code sniffer
@@ -52,7 +50,7 @@ OUTPUT=$($PHPCS_BIN -s --standard=$PHPCS_CODING_STANDARD --encoding=utf-8 $FILES
 RETVAL=$?
 
 if [ $RETVAL -ne 0 ]; then
-    echo "Code Style violations detected:" "$OUTPUT"
+	echo "Code Style violations detected:" "$OUTPUT"
 fi
 
 exit $RETVAL

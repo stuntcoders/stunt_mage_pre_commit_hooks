@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Check for leftover debug code in JS files
+# Check for leftover debug code in PHP & JS files
 FILES_PATTERN='\.(php|phtml|js)(\..+)?$'
 FORBIDDENS=('var_dump' 'Zend_Debug' 'console.log')
 
