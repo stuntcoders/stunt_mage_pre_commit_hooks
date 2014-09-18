@@ -1,4 +1,4 @@
-
+#!/usr/bin/env bash
 
 # PHP CodeSniffer pre-commit hook for git
 # VARIABLES

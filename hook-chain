@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Taken from: https://github.com/henrik/dotfiles/blob/master/git_template/hooks/pre-commit
 # Runs all executable pre-commit-* hooks and exits after,
