@@ -6,8 +6,7 @@ data=$(cat)
 exitcodes=()
 hookname=`basename $0`
 
-# Run each hook, passing through STDIN and storing the exit code.
-# We don't want to bail at the first failure, as the user might
+# We don't want to exit on the first failure, as the user might
 # then bypass the hooks without knowing about additional issues.
 for hook in $GIT_DIR/hooks/$hookname.*; do
     test -x "$hook" || continue
@@ -15,7 +14,7 @@ for hook in $GIT_DIR/hooks/$hookname.*; do
     exitcodes+=($?)
 done
 
-# If any exit code isn't 0, bail.
+# If any exit code isn't 0, exit.
 for i in "${exitcodes[@]}"; do
     if [ "$i" != 0 ]; then
         tput setaf 1

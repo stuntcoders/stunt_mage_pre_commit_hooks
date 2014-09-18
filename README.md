@@ -1,4 +1,4 @@
-# Pre-commit hooks v0.1.1
+# Pre-commit hooks v0.1.2
 
 Pre-commit Git hooks for Magento projects which check if:
 
