@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 # Check if Magento core file were changed
+# Based on: https://gist.github.com/drewhunter/8037753
 
 set -eu
 

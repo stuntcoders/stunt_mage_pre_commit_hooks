@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 # Check for leftover debug code in PHP & JS files
+# Based on: http://codeinthehole.com/writing/tips-for-using-a-git-pre-commit-hook/
 
 FILES_PATTERN='\.(php|phtml|js)(\..+)?$'
 FORBIDDENS=('var_dump' 'Zend_Debug' 'console.log')

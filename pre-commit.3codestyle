@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 # PHP CodeSniffer pre-commit hook for git
+# Based on: https://github.com/s0enke/git-hooks/blob/master/phpcs-pre-commit/pre-commit
 
 # Variables
 PHPCS_BIN=$(which phpcs)
