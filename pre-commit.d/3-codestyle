@@ -7,7 +7,7 @@ PHPCS_BIN=$(which phpcs)
 PHPCS_CODING_STANDARD=Magento
 PHPCS_IGNORE_WARNINGS=1
 PHPCS_ENCODING=utf-8
-PHPCS_FILE_PATTERN="\.(php|phtml)$"
+PHPCS_FILE_PATTERN="\.(php)$"
 
 if [ ! -x $PHPCS_BIN ]; then
 	echo "PHP CodeSniffer bin not found or executable -> $PHPCS_BIN"
