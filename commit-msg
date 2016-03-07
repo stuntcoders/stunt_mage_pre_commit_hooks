@@ -1,0 +1,31 @@
+#!/usr/bin/env node
+
+'use strict';
+
+var fs = require('fs');
+
+fs.readFile(process.argv[2], function(err, buffer) {
+  var errors = 0,
+    messages = buffer.toString().split('\n'),
+    line = messages.shift();
+
+  if (line && line.length > 50) {
+    console.error('Commit message title has more than 50 characters');
+    errors++;
+  }
+
+  line = messages.shift();
+  if (line && line.length > 0) {
+    console.error('Second commit message line is not empty');
+    errors++;
+  }
+
+  messages.forEach(function (line) {
+    if (line && line.charAt(0) !== '#' && line.length > 72) {
+      console.error('Commit message body line has more than 72 characters');
+      errors++;
+    }
+  });
+
+  process.exit(errors);
+});
