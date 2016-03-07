@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+cp pre-commit ../.git/hooks/pre-commit
+cp -R pre-commit.d ../.git/hooks/pre-commit.d
+
+chmod +x ../.git/hooks/pre-commit
+find ../.git/hooks/pre-commit.d -type f -print0 | xargs -0 chmod +x
