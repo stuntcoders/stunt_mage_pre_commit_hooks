@@ -10,6 +10,7 @@ hookname=`basename $0`
 # then bypass the hooks without knowing about additional issues.
 for hook in $GIT_DIR/hooks/$hookname.d/*; do
     test -x "$hook" || continue
+    test -f "$hook" || continue
     echo "$data" | "$hook"
     exitcodes+=($?)
 done
