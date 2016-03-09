@@ -15,7 +15,12 @@ module.exports.validateCommitMessage = function (message) {
   }
 
   if (line && !/^[A-Z]/.test(line)) {
-    console.error('Capitalize the title line');
+    console.error('Capitalize the commit message title line');
+    errorCode = 1;
+  }
+
+  if (line && '.' === line.slice(-1)) {
+    console.error('Do not end the commit message with a period');
     errorCode = 1;
   }
 

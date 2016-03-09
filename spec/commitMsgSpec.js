@@ -16,6 +16,12 @@ describe('commit-msg tests', function() {
     expect(hook.validateCommitMessage(message)).toBe(1);
   });
 
+  it('shouldn\'t accept commit messages title which ends with a period', function() {
+    var message = 'Commit message.';
+
+    expect(hook.validateCommitMessage(message)).toBe(1);
+  });
+
   it('shouldn\'t accept commit messages without empty line between title and body', function() {
     var message = [
       'Commit message title',
