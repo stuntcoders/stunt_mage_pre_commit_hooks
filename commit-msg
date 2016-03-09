@@ -9,17 +9,21 @@ module.exports.validateCommitMessage = function (message) {
     lines = message.split('\n'),
     line = lines.shift();
 
-  if (line && line.length > 50) {
+  if (!line) {
+    return errorCode;
+  }
+
+  if (line.length > 50) {
     console.error('Limit the commit message title line to 50 characters');
     errorCode = 1;
   }
 
-  if (line && !/^[A-Z]/.test(line)) {
+  if (!/^[A-Z]/.test(line)) {
     console.error('Capitalize the commit message');
     errorCode = 1;
   }
 
-  if (line && '.' === line.slice(-1)) {
+  if ('.' === line.slice(-1)) {
     console.error('Do not end the commit message with a period');
     errorCode = 1;
   }

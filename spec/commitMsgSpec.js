@@ -52,6 +52,10 @@ describe('commit-msg tests', function() {
     expect(hook.validateCommitMessage(message)).toBe(0);
   });
 
+  it('should allow empty commit message', function() {
+    expect(hook.validateCommitMessage('')).toBe(0);
+  });
+
   it('should accept valid commit message', function() {
     var message = [
       'Commit message title',
