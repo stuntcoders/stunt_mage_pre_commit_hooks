@@ -5,45 +5,45 @@
 var fs = require('fs');
 
 module.exports.validateCommitMessage = function (message) {
-  var errorCode = 0,
-    lines = message.split('\n'),
-    line = lines.shift();
+    var errorCode = 0,
+        lines = message.split('\n'),
+        line = lines.shift();
 
-  if (!line) {
-    return errorCode;
-  }
-
-  if (line.length > 50) {
-    console.error('Limit the commit message title line to 50 characters');
-    errorCode = 1;
-  }
-
-  if (!/^[A-Z]/.test(line)) {
-    console.error('Capitalize the commit message');
-    errorCode = 1;
-  }
-
-  if ('.' === line.slice(-1)) {
-    console.error('Do not end the commit message with a period');
-    errorCode = 1;
-  }
-
-  line = lines.shift();
-  if (line && line.length > 0) {
-    console.error('Second commit message line is not empty');
-    errorCode = 1;
-  }
-
-  lines.forEach(function (line) {
-    if (line && line.charAt(0) !== '#' && line.length > 72) {
-      console.error('Wrap the commit message body at 72 characters');
-      errorCode = 1;
+    if (!line) {
+        return errorCode;
     }
-  });
 
-  return errorCode;
+    if (line.length > 50) {
+        console.error('Limit the commit message title line to 50 characters');
+        errorCode = 1;
+    }
+
+    if (!/^[A-Z]/.test(line)) {
+        console.error('Capitalize the commit message');
+        errorCode = 1;
+    }
+
+    if ('.' === line.slice(-1)) {
+        console.error('Do not end the commit message with a period');
+        errorCode = 1;
+    }
+
+    line = lines.shift();
+    if (line && line.length > 0) {
+        console.error('Second commit message line is not empty');
+        errorCode = 1;
+    }
+
+    lines.forEach(function (line) {
+        if (line && line.charAt(0) !== '#' && line.length > 72) {
+            console.error('Wrap the commit message body at 72 characters');
+            errorCode = 1;
+        }
+    });
+
+    return errorCode;
 };
 
-fs.readFile(process.argv[2], function(err, buffer) {
-  process.exit(module.exports.validateCommitMessage(buffer.toString()));
+fs.readFile(process.argv[2], function (_, buffer) {
+    process.exit(module.exports.validateCommitMessage(buffer.toString()));
 });
