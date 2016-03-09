@@ -10,12 +10,12 @@ module.exports.validateCommitMessage = function (message) {
     line = lines.shift();
 
   if (line && line.length > 50) {
-    console.error('Commit message title has more than 50 characters');
+    console.error('Limit the commit message title line to 50 characters');
     errorCode = 1;
   }
 
   if (line && !/^[A-Z]/.test(line)) {
-    console.error('Capitalize the commit message title line');
+    console.error('Capitalize the commit message');
     errorCode = 1;
   }
 
@@ -32,7 +32,7 @@ module.exports.validateCommitMessage = function (message) {
 
   lines.forEach(function (line) {
     if (line && line.charAt(0) !== '#' && line.length > 72) {
-      console.error('Commit message body line has more than 72 characters');
+      console.error('Wrap the commit message body at 72 characters');
       errorCode = 1;
     }
   });
