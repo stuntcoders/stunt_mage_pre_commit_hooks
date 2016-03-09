@@ -4,28 +4,32 @@
 
 var fs = require('fs');
 
-fs.readFile(process.argv[2], function(err, buffer) {
-  var errors = 0,
-    messages = buffer.toString().split('\n'),
-    line = messages.shift();
+module.exports.validateCommitMessage = function (message) {
+  var errorCode = 0,
+    lines = message.split('\n'),
+    line = lines.shift();
 
   if (line && line.length > 50) {
     console.error('Commit message title has more than 50 characters');
-    errors++;
+    errorCode = 1;
   }
 
-  line = messages.shift();
+  line = lines.shift();
   if (line && line.length > 0) {
     console.error('Second commit message line is not empty');
-    errors++;
+    errorCode = 1;
   }
 
-  messages.forEach(function (line) {
+  lines.forEach(function (line) {
     if (line && line.charAt(0) !== '#' && line.length > 72) {
       console.error('Commit message body line has more than 72 characters');
-      errors++;
+      errorCode = 1;
     }
   });
 
-  process.exit(errors);
+  return errorCode;
+};
+
+fs.readFile(process.argv[2], function(err, buffer) {
+  process.exit(module.exports.validateCommitMessage(buffer.toString()));
 });
