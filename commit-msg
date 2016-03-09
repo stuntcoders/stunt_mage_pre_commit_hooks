@@ -14,6 +14,11 @@ module.exports.validateCommitMessage = function (message) {
     errorCode = 1;
   }
 
+  if (line && !/^[A-Z]/.test(line)) {
+    console.error('Capitalize the title line');
+    errorCode = 1;
+  }
+
   line = lines.shift();
   if (line && line.length > 0) {
     console.error('Second commit message line is not empty');

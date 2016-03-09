@@ -10,6 +10,12 @@ describe('commit-msg tests', function() {
     expect(hook.validateCommitMessage(message)).toBe(1);
   });
 
+  it('shouldn\'t accept commit messages starting with lowercase character', function() {
+    var message = 'commit message';
+
+    expect(hook.validateCommitMessage(message)).toBe(1);
+  });
+
   it('shouldn\'t accept commit messages without empty line between title and body', function() {
     var message = [
       'Commit message title',
