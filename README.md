@@ -17,6 +17,9 @@ cd git_hooks && ./install
 cd ../ && rm -rf git_hooks
 ```
 
+## Tests
+To run tests, install [jasmine-node](https://github.com/mhevery/jasmine-node) and run `jasmine-node spec/`
+
 ## Todo
 * Separate Magento & WordPress code and check against the appropriate coding standard.
 * Add jshit/jscs pre-commit hook.
