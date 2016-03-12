@@ -16,6 +16,8 @@ module.exports.isCoreFileEdited = function (files) {
             'app/design/frontend/base',
             'app/design/adminhtml/default',
             'skin/frontend/base',
+            'skin/frontend/default',
+            'skin/adminhtml/default',
             'shell/'
         ];
 
