@@ -4,7 +4,7 @@
 
 var exitCode = 0,
     commitHooks = [
-        './pre-commit.d/example',
+        './pre-commit.d/corefiles',
     ];
 
 commitHooks.forEach(function (hook) {

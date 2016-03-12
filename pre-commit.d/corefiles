@@ -1,0 +1,36 @@
+#!/usr/bin/env node
+
+'use strict';
+
+var exec = require('child_process').execSync;
+
+module.exports.isCoreFileEdited = function (files) {
+    var coreFilesPatterns = [
+        'app/code/core',
+        'app/Mage.php$',
+        '^index.php$',
+        'lib/Zend',
+        'lib/Mage',
+        'app/design/frontend/base',
+        'app/design/adminhtml/base',
+        'skin/frontend/base',
+        'shell/'
+    ];
+
+    files.forEach(function (file) {
+        coreFilesPatterns.some(function (pattern) {
+             if (new RegExp(pattern, 'i').test(file)) {
+                 console.log('Core file edited: ' + file);
+                 return true;
+             }
+        });
+    });
+
+    return 1;
+}
+
+module.exports.run = function () {
+    var files = exec('git diff-index --name-only HEAD').toString().trim().split('\n');
+
+    return module.exports.isCoreFileEdited(files);
+}
