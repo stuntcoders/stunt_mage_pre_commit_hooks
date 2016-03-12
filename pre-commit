@@ -1,25 +1,18 @@
-#!/usr/bin/env bash
+#!/usr/bin/env node
 
-# Based on: https://github.com/henrik/dotfiles/blob/master/git_template/hooks/pre-commit
+'use strict';
 
-data=$(cat)
-exitcodes=()
-hookname=`basename $0`
+var exitCode = 0,
+    commitHooks = [
+        './pre-commit.d/example',
+    ];
 
-# We don't want to exit on the first failure, as the user might
-# then bypass the hooks without knowing about additional issues.
-for hook in $GIT_DIR/hooks/$hookname.d/*; do
-    test -x "$hook" || continue
-    test -f "$hook" || continue
-    echo "$data" | "$hook"
-    exitcodes+=($?)
-done
+commitHooks.forEach(function (hook) {
+    exitCode = exitCode || require(hook).run();
+});
 
-# If any exit code isn't 0, exit.
-for i in "${exitcodes[@]}"; do
-    if [ "$i" != 0 ]; then
-        tput setaf 1
-        echo "-- COMMIT REJECTED --"
-        exit $i
-    fi
-done
+if (exitCode) {
+    console.log('-- Pre-commit hook failed --');
+}
+
+process.exit(exitCode);
