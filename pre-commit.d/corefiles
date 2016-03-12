@@ -7,16 +7,16 @@ var exec = require('child_process').execSync;
 module.exports.isCoreFileEdited = function (files) {
     var exitCode = 0,
         coreFilesPatterns = [
-        'app/code/core',
-        'app/Mage.php$',
-        '^index.php$',
-        'lib/Zend',
-        'lib/Mage',
-        'app/design/frontend/base',
-        'app/design/adminhtml/base',
-        'skin/frontend/base',
-        'shell/'
-    ];
+            'app/code/core',
+            'app/Mage.php$',
+            '^index.php$',
+            'lib/Zend',
+            'lib/Mage',
+            'app/design/frontend/base',
+            'app/design/adminhtml/base',
+            'skin/frontend/base',
+            'shell/'
+        ];
 
     files.forEach(function (file) {
         coreFilesPatterns.some(function (pattern) {
