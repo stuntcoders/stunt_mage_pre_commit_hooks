@@ -13,7 +13,7 @@ module.exports.isCoreFileEdited = function (files) {
             'lib/Zend',
             'lib/Mage',
             'app/design/frontend/base',
-            'app/design/adminhtml/base',
+            'app/design/adminhtml/default',
             'skin/frontend/base',
             'shell/'
         ];
