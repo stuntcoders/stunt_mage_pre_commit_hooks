@@ -14,10 +14,15 @@ module.exports.hasDebugCode = function (files) {
         ];
 
     files.forEach(function (file) {
-        var data = fs.readFileSync(file).toString();
+        var fileContent;
 
+        if (!fs.existsSync(file)) {
+            return;
+        }
+
+        fileContent = fs.readFileSync(file).toString();
         debugCodePatterns.some(function (pattern) {
-            var matches = data.match(new RegExp('.*' + pattern + '.*', 'gi'));
+            var matches = fileContent.match(new RegExp('.*' + pattern + '.*', 'gi'));
             (matches || []).forEach(function (match) {
                console.log('Debug call found: ' + match);
                exitCode = 1;
