@@ -1,4 +1,4 @@
-# Pre-commit hooks v0.1.3
+# Pre-commit hooks v0.2.0
 
 * Pre-commit Git hooks for Magento projects which check if:
   * Changes have been made to Magento core files. (PHP)
@@ -6,9 +6,9 @@
   * There are debugging functions in JavaScript or PHP files. (PHP & JS)
 
 * Commit message git hook which checks if:
-  * Commit message title has more than 50 chanracters.
+  * Commit message title has more than 50 characters.
   * Commit message body lines have more than 72 characters.
-  * Message title and messsage body are not separated by empty line.
+  * Message title and message body are not separated by empty line.
 
 ## Install
 ```sh
