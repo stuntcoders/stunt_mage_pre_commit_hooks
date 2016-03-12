@@ -1,4 +1,4 @@
-# Pre-commit hooks v0.1.3
+# Pre-commit hooks v0.2.0
 
 * Pre-commit Git hooks for Magento projects which check if:
   * Changes have been made to Magento core files. (PHP)
