@@ -5,7 +5,8 @@
 var exec = require('child_process').execSync;
 
 module.exports.isCoreFileEdited = function (files) {
-    var coreFilesPatterns = [
+    var exitCode = 0,
+        coreFilesPatterns = [
         'app/code/core',
         'app/Mage.php$',
         '^index.php$',
@@ -21,12 +22,14 @@ module.exports.isCoreFileEdited = function (files) {
         coreFilesPatterns.some(function (pattern) {
              if (new RegExp(pattern, 'i').test(file)) {
                  console.log('Core file edited: ' + file);
+                 exitCode = 1;
+
                  return true;
              }
         });
     });
 
-    return 1;
+    return exitCode;
 }
 
 module.exports.run = function () {
