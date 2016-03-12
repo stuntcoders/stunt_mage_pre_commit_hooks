@@ -12,6 +12,7 @@ module.exports.isCoreFileEdited = function (files) {
             '^index.php$',
             'lib/Zend',
             'lib/Mage',
+            'lib/Varien',
             'app/design/frontend/base',
             'app/design/adminhtml/default',
             'skin/frontend/base',
