@@ -14,6 +14,7 @@ module.exports.isCoreFileEdited = function (files) {
             'lib/Mage',
             'lib/Varien',
             'app/design/frontend/base',
+            'app/design/frontend/default',
             'app/design/adminhtml/default',
             'skin/frontend/base',
             'skin/frontend/default',
