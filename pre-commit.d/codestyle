@@ -7,20 +7,14 @@ let fs = require('fs');
 let path = require('path');
 
 module.exports.getPhpFiles = (files) => {
-    let phpFiles = [];
-
-    files.forEach((file) => {
-        if ('.php' === path.extname(file)) {
-            phpFiles.push(file);
-        }
+    return files.filter((file) => {
+        return '.php' === path.extname(file);
     });
-
-    return phpFiles;
 }
 
 module.exports.run = () => {
     let files = exec('git diff-index --name-only HEAD').toString().trim().split('\n');
-    
+
     try {
         exec('phpcs --encoding=utf-8 ' + module.exports.getPhpFiles(files).join(' '), { stdio: [0, 1, 2] }).toString().trim();
 
