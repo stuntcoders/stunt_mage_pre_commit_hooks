@@ -6,6 +6,7 @@ let exitCode = 0,
     commitHooks = [
         './pre-commit.d/corefiles',
         './pre-commit.d/debugcode',
+        './pre-commit.d/codestyle',
     ];
 
 commitHooks.forEach((hook) => {
