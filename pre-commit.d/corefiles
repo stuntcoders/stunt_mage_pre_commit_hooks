@@ -31,7 +31,7 @@ module.exports.isCoreFileEdited = (files) => {
 }
 
 module.exports.run = () => {
-    let files = exec('git diff-index --name-only HEAD').toString().trim().split('\n');
+    let files = exec('git diff-index --name-only --cached HEAD').toString().trim().split('\n');
 
     return module.exports.isCoreFileEdited(files);
 }
