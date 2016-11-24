@@ -2,10 +2,10 @@
 
 'use strict';
 
-var exec = require('child_process').execSync;
+let exec = require('child_process').execSync;
 
-module.exports.isCoreFileEdited = function (files) {
-    var exitCode = 0,
+module.exports.isCoreFileEdited = (files) => {
+    let exitCode = 0,
         coreFilesPatterns = [
             'app/code/core',
             'app/Mage.php$',
@@ -16,8 +16,8 @@ module.exports.isCoreFileEdited = function (files) {
             'shell/'
         ];
 
-    files.forEach(function (file) {
-        coreFilesPatterns.some(function (pattern) {
+    files.forEach((file) => {
+        coreFilesPatterns.some((pattern) => {
              if (new RegExp(pattern, 'i').test(file)) {
                  console.log('Core file edited: ' + file);
                  exitCode = 1;
@@ -30,8 +30,8 @@ module.exports.isCoreFileEdited = function (files) {
     return exitCode;
 }
 
-module.exports.run = function () {
-    var files = exec('git diff-index --name-only HEAD').toString().trim().split('\n');
+module.exports.run = () => {
+    let files = exec('git diff-index --name-only HEAD').toString().trim().split('\n');
 
     return module.exports.isCoreFileEdited(files);
 }

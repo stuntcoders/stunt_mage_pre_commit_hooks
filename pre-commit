@@ -2,13 +2,13 @@
 
 'use strict';
 
-var exitCode = 0,
+let exitCode = 0,
     commitHooks = [
         './pre-commit.d/corefiles',
         './pre-commit.d/debugcode',
     ];
 
-commitHooks.forEach(function (hook) {
+commitHooks.forEach((hook) => {
     exitCode = exitCode || require(hook).run();
 });
 

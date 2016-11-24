@@ -2,28 +2,28 @@
 
 'use strict';
 
-var exec = require('child_process').execSync;
-var fs = require('fs');
+let exec = require('child_process').execSync;
+let fs = require('fs');
 
-module.exports.hasDebugCode = function (files) {
-    var exitCode = 0,
+module.exports.hasDebugCode = (files) => {
+    let exitCode = 0,
         debugCodePatterns = [
             'var_dump',
             'Zend_Debug',
             'console\.log'
         ];
 
-    files.forEach(function (file) {
-        var fileContent;
+    files.forEach((file) => {
+        let fileContent;
 
         if (!fs.existsSync(file)) {
             return;
         }
 
         fileContent = fs.readFileSync(file).toString();
-        debugCodePatterns.some(function (pattern) {
-            var matches = fileContent.match(new RegExp('.*' + pattern + '.*', 'gi'));
-            (matches || []).forEach(function (match) {
+        debugCodePatterns.some((pattern) => {
+            let matches = fileContent.match(new RegExp(`^.*\b${pattern}\b.*$`, 'gi'));
+            (matches || []).forEach((match) => {
                console.log('Debug call found: ' + match);
                exitCode = 1;
                return true;
@@ -34,8 +34,8 @@ module.exports.hasDebugCode = function (files) {
     return exitCode;
 }
 
-module.exports.run = function () {
-    var files = exec('git diff-index --name-only HEAD').toString().trim().split('\n');
+module.exports.run = () => {
+    let files = exec('git diff-index --name-only HEAD').toString().trim().split('\n');
 
     return module.exports.hasDebugCode(files);
 }

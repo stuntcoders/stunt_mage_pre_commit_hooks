@@ -4,7 +4,7 @@
 
 var fs = require('fs');
 
-module.exports.validateCommitMessage = function (message) {
+module.exports.validateCommitMessage = (message) => {
     var errorCode = 0,
         lines = message.split('\n'),
         line = lines.shift();
@@ -44,6 +44,6 @@ module.exports.validateCommitMessage = function (message) {
     return errorCode;
 };
 
-fs.readFile(process.argv[2], function (_, buffer) {
+fs.readFile(process.argv[2], (_, buffer) => {
     process.exit(module.exports.validateCommitMessage(buffer.toString()));
 });
