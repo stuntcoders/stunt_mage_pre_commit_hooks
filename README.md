@@ -1,4 +1,4 @@
-# Pre-commit hooks v1.0.0
+# Pre-commit hooks v1.0.1
 
 * Pre-commit Git hooks for Magento projects which check if:
   * Changes have been made to Magento core files. (PHP)
@@ -12,9 +12,21 @@
 
 ## Install
 ```sh
-git clone --depth 1 https://github.com/stuntcoders/stunt_mage_pre_commit_hooks.git git_hooks
-cd git_hooks && ./install
-cd ../ && rm -rf git_hooks
+cd ~/Magento/project/repo/
+
+ln -sf ~/Path/to/hooks/repo/stunt_mage_pre_commit_hooks/pre-commit .git/hooks/pre-commit
+ln -sf ~/Path/to/hooks/repo/stunt_mage_pre_commit_hooks/pre-commit.d .git/hooks/pre-commit.d
+ln -sf ~/Path/to/hooks/repo/stunt_mage_pre_commit_hooks/commit-msg .git/hooks/commit-msg
+
+chmod +x .git/hooks/pre-commit
+chmod +x .git/hooks/commit-msg
+```
+
+## Update
+```sh
+cd ~/Path/to/hooks/repo/stunt_mage_pre_commit_hooks
+
+git pull origin master
 ```
 
 ## Tests
