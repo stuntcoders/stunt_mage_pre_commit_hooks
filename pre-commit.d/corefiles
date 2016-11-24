@@ -1,0 +1,37 @@
+#!/usr/bin/env node
+
+'use strict';
+
+let exec = require('child_process').execSync;
+
+module.exports.isCoreFileEdited = (files) => {
+    let exitCode = 0,
+        coreFilesPatterns = [
+            'app/code/core',
+            'app/Mage.php$',
+            '^index.php$',
+            'lib/(Zend|Mage|Varien)',
+            'app/design/(adminhtml|frontend)/(base|default)',
+            'skin/(adminhtml|frontend)/(base|default)',
+            'shell/'
+        ];
+
+    files.forEach((file) => {
+        coreFilesPatterns.some((pattern) => {
+             if (new RegExp(pattern, 'i').test(file)) {
+                 console.log('Core file edited: ' + file);
+                 exitCode = 1;
+
+                 return true;
+             }
+        });
+    });
+
+    return exitCode;
+}
+
+module.exports.run = () => {
+    let files = exec('git diff-index --name-only --cached HEAD').toString().trim().split('\n');
+
+    return module.exports.isCoreFileEdited(files);
+}

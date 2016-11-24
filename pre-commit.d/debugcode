@@ -1,0 +1,41 @@
+#!/usr/bin/env node
+
+'use strict';
+
+let exec = require('child_process').execSync;
+let fs = require('fs');
+
+module.exports.hasDebugCode = (files) => {
+    let exitCode = 0,
+        debugCodePatterns = [
+            'var_dump',
+            'Zend_Debug',
+            'console\.log'
+        ];
+
+    files.forEach((file) => {
+        let fileContent;
+
+        if (!fs.existsSync(file)) {
+            return;
+        }
+
+        fileContent = fs.readFileSync(file).toString();
+        debugCodePatterns.some((pattern) => {
+            let matches = fileContent.match(new RegExp(`^.*\b${pattern}\b.*$`, 'gi'));
+            (matches || []).forEach((match) => {
+               console.log('Debug call found: ' + match);
+               exitCode = 1;
+               return true;
+            });
+        });
+    });
+
+    return exitCode;
+}
+
+module.exports.run = () => {
+    let files = exec('git diff-index --name-only --cached HEAD').toString().trim().split('\n');
+
+    return module.exports.hasDebugCode(files);
+}
