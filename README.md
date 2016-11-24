@@ -22,6 +22,13 @@ chmod +x .git/hooks/pre-commit
 chmod +x .git/hooks/commit-msg
 ```
 
+## Update
+```sh
+cd ~/Path/to/hooks/repo/stunt_mage_pre_commit_hooks
+
+git pull origin master
+```
+
 ## Tests
 To run tests, install [jasmine-node](https://github.com/mhevery/jasmine-node) and run `jasmine-node spec/`
 
