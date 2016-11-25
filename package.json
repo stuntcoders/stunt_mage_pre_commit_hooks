@@ -3,7 +3,7 @@
   "version": "1.0.3",
   "description": "StuntCoders Magento Commit Hooks",
   "scripts": {
-    "test": "jasmine-grunt spec/"
+    "test": "jasmine-node spec/"
   },
   "repository": {
     "type": "git",
