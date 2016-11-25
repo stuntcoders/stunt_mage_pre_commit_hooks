@@ -11,7 +11,7 @@ module.exports.isCoreFileEdited = (files) => {
             'app/Mage.php$',
             '^index.php$',
             'lib/(Zend|Mage|Varien)',
-            'app/design/(adminhtml|frontend)/(base|default)',
+            'app/design/(adminhtml|frontend)/(base|default)/default',
             'skin/(adminhtml|frontend)/(base|default)',
             'shell/'
         ];
