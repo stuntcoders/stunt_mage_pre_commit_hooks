@@ -1,5 +1,7 @@
 # Pre-commit hooks v1.0.3
 
+[![Build Status](https://travis-ci.org/stuntcoders/stunt_mage_pre_commit_hooks.svg?branch=master)](https://travis-ci.org/stuntcoders/stunt_mage_pre_commit_hooks)
+
 * Pre-commit Git hooks for Magento projects which check if:
   * Changes have been made to Magento core files. (PHP)
   * The code follows the default coding standard. (PHP)
