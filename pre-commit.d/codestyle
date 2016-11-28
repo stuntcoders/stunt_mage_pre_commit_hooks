@@ -16,7 +16,11 @@ module.exports.run = () => {
     let files = exec('git diff-index --name-only HEAD').toString().trim().split('\n');
 
     try {
-        exec('phpcs --encoding=utf-8 ' + module.exports.getPhpFiles(files).join(' '), { stdio: [0, 1, 2] });
+        let phpFiles = module.exports.getPhpFiles(files);
+
+        if (phpFiles.length) {
+            exec('phpcs --encoding=utf-8 ' + phpFiles.join(' '), { stdio: [0, 1, 2] });
+        }
 
         return 0;
     } catch (e) {
