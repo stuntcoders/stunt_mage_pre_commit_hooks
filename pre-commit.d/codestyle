@@ -8,7 +8,7 @@ let path = require('path');
 
 module.exports.getPhpFiles = (files) => {
     return files.filter((file) => {
-        return '.php' === path.extname(file);
+        return -1 !== ['.php', '.phtml'].indexOf(path.extname(file));
     });
 }
 
