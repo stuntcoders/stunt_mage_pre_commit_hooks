@@ -34,9 +34,11 @@ describe('pre-commit corefiles tests', () => {
         expect(hook.isCoreFileEdited(['app/design/frontend/base/default/template/page/empty.phtml'])).toBe(1);
         expect(hook.isCoreFileEdited(['app/design/frontend/default/default/template/page/empty.phtml'])).toBe(1);
         expect(hook.isCoreFileEdited(['app/design/frontend/custom-package/default/template/page/empty.phtml'])).toBe(0);
+        expect(hook.isCoreFileEdited(['app/design/frontend/default/custom-theme/template/page/empty.phtml'])).toBe(0);
 
         expect(hook.isCoreFileEdited(['app/design/adminhtml/default/default/template/login.phtml'])).toBe(1);
         expect(hook.isCoreFileEdited(['app/design/adminhtml/custom-package/default/template/login.phtml'])).toBe(0);
+        expect(hook.isCoreFileEdited(['app/design/adminhtml/default/custom-theme/template/login.phtml'])).toBe(0);
     });
 
     it('shouldn\'t allow changes to core skin files', () => {
