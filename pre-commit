@@ -13,8 +13,4 @@ commitHooks.forEach((hook) => {
     exitCode = exitCode || require(hook).run();
 });
 
-if (exitCode) {
-    console.log('-- Pre-commit hook failed --');
-}
-
 process.exit(exitCode);
