@@ -1,4 +1,4 @@
-# Pre-commit hooks v1.1.1
+# Pre-commit hooks v1.1.2
 
 [![Build Status](https://travis-ci.org/stuntcoders/stunt_mage_pre_commit_hooks.svg?branch=master)](https://travis-ci.org/stuntcoders/stunt_mage_pre_commit_hooks)
 
