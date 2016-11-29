@@ -1,4 +1,4 @@
-# Pre-commit hooks v1.1.1
+# Pre-commit hooks v1.1.2
 
 [![Build Status](https://travis-ci.org/stuntcoders/stunt_mage_pre_commit_hooks.svg?branch=master)](https://travis-ci.org/stuntcoders/stunt_mage_pre_commit_hooks)
 
@@ -16,9 +16,9 @@
 ```sh
 cd ~/Magento/project/repo/
 
-ln -sf ~/Path/to/hooks/repo/stunt_mage_pre_commit_hooks/pre-commit .git/hooks/pre-commit
-ln -sf ~/Path/to/hooks/repo/stunt_mage_pre_commit_hooks/pre-commit.d .git/hooks/pre-commit.d
-ln -sf ~/Path/to/hooks/repo/stunt_mage_pre_commit_hooks/commit-msg .git/hooks/commit-msg
+ln -sf ~/Sites/stunt_mage_pre_commit_hooks/pre-commit .git/hooks/pre-commit
+ln -sf ~/Sites/stunt_mage_pre_commit_hooks/pre-commit.d .git/hooks/pre-commit.d
+ln -sf ~/Sites/stunt_mage_pre_commit_hooks/commit-msg .git/hooks/commit-msg
 
 chmod +x .git/hooks/pre-commit
 chmod +x .git/hooks/commit-msg
@@ -26,7 +26,7 @@ chmod +x .git/hooks/commit-msg
 
 ## Update
 ```sh
-cd ~/Path/to/hooks/repo/stunt_mage_pre_commit_hooks
+cd ~/Sites/stunt_mage_pre_commit_hooks
 
 git pull origin master
 ```

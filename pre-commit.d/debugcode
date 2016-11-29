@@ -6,12 +6,12 @@ let exec = require('child_process').execSync;
 let fs = require('fs');
 
 module.exports.hasDebugCode = (files) => {
-    let exitCode = 0,
-        debugCodePatterns = [
-            'var_dump',
-            'Zend_Debug',
-            'console\.log'
-        ];
+    let exitCode = 0;
+    let debugCodePatterns = [
+        'var_dump',
+        'Zend_Debug',
+        'console\.log'
+    ];
 
     files.forEach((file) => {
         let fileContent;

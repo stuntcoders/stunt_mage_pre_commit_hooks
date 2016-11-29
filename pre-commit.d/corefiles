@@ -5,16 +5,16 @@
 let exec = require('child_process').execSync;
 
 module.exports.isCoreFileEdited = (files) => {
-    let exitCode = 0,
-        coreFilesPatterns = [
-            'app/code/core',
-            'app/Mage.php$',
-            '^index.php$',
-            'lib/(Zend|Mage|Varien)',
-            'app/design/(adminhtml|frontend)/(base|default)/default',
-            'skin/(adminhtml|frontend)/(base|default)/default',
-            'shell/'
-        ];
+    let exitCode = 0;
+    let coreFilesPatterns = [
+        'app/code/core',
+        'app/Mage.php$',
+        '^index.php$',
+        'lib/(Zend|Mage|Varien)',
+        'app/design/(adminhtml|frontend)/(base|default)/default',
+        'skin/(adminhtml|frontend)/(base|default)/default',
+        'shell/'
+    ];
 
     files.forEach((file) => {
         coreFilesPatterns.some((pattern) => {
@@ -28,10 +28,10 @@ module.exports.isCoreFileEdited = (files) => {
     });
 
     return exitCode;
-}
+};
 
 module.exports.run = () => {
     let files = exec('git diff-index --name-only --cached HEAD').toString().trim().split('\n');
 
     return module.exports.isCoreFileEdited(files);
-}
+};
