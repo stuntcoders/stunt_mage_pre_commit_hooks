@@ -5,9 +5,9 @@
 var fs = require('fs');
 
 module.exports.validateCommitMessage = (message) => {
-    var errorCode = 0,
-        lines = message.split('\n'),
-        line = lines.shift();
+    let errorCode = 0;
+    let lines = message.split('\n');
+    let line = lines.shift();
 
     if (!line) {
         return errorCode;
