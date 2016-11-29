@@ -5,16 +5,16 @@
 var fs = require('fs');
 
 module.exports.validateCommitMessage = (message) => {
-    var errorCode = 0,
-        lines = message.split('\n'),
-        line = lines.shift();
+    let errorCode = 0;
+    let lines = message.split('\n');
+    let line = lines.shift();
 
     if (!line) {
         return errorCode;
     }
 
     if (line.length > 50) {
-        console.error('Limit the commit message title line to 50 characters');
+        console.error(`Commit message title is ${line.length} characters long; Limit it to 50 characters`);
         errorCode = 1;
     }
 
@@ -36,7 +36,7 @@ module.exports.validateCommitMessage = (message) => {
 
     lines.forEach(function (line) {
         if (line && line.charAt(0) !== '#' && line.length > 72) {
-            console.error('Wrap the commit message body at 72 characters');
+            console.error(`Commit message body line is ${line.length} characters long; Limit it to 72 characters`);
             errorCode = 1;
         }
     });

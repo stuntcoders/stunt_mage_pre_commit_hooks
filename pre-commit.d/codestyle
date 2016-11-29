@@ -10,7 +10,7 @@ module.exports.getPhpFiles = (files) => {
     return files.filter((file) => {
         return -1 !== ['.php', '.phtml'].indexOf(path.extname(file));
     });
-}
+};
 
 module.exports.run = () => {
     let files = exec('git diff-index --name-only HEAD').toString().trim().split('\n');
@@ -26,4 +26,4 @@ module.exports.run = () => {
     } catch (e) {
         return 1;
     }
-}
+};
