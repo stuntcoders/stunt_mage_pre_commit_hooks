@@ -1,6 +1,6 @@
 {
   "name": "stunt_mage_pre_commit_hooks",
-  "version": "1.1.0",
+  "version": "1.1.3",
   "description": "StuntCoders Magento Commit Hooks",
   "scripts": {
     "test": "jasmine-node spec/"
