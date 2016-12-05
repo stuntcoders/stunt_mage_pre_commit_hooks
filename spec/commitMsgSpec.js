@@ -4,8 +4,8 @@ let hook = require('../commit-msg');
 
 describe('commit-msg tests', () => {
 
-  it('shouldn\'t accept commit messages with more than 50 characters in title', () => {
-    let message = 'Commit message'.repeat(5);
+  it('shouldn\'t accept commit messages with more than 72 characters in title', () => {
+    let message = 'Commit message'.repeat(10);
 
     expect(hook.validateCommitMessage(message)).toBe(1);
   });

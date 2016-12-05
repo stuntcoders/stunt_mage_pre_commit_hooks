@@ -12,6 +12,12 @@ module.exports.getPhpFiles = (files) => {
     });
 };
 
+module.exports.skipDeletedFiles = (files) => {
+    return files.filter((file) => {
+        return fs.existsSync(file);
+    });
+};
+
 module.exports.run = () => {
     let files = exec('git diff-index --name-only HEAD').toString().trim().split('\n');
 
@@ -19,7 +25,7 @@ module.exports.run = () => {
         let phpFiles = module.exports.getPhpFiles(files);
 
         if (phpFiles.length) {
-            exec('phpcs --encoding=utf-8 ' + phpFiles.join(' '), { stdio: [0, 1, 2] });
+            exec('phpcs --encoding=utf-8 ' + module.exports.skipDeletedFiles(phpFiles).join(' '), { stdio: [0, 1, 2] });
         }
 
         return 0;
