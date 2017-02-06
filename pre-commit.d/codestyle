@@ -22,10 +22,11 @@ module.exports.run = () => {
     let files = exec('git diff-index --name-only HEAD').toString().trim().split('\n');
 
     try {
-        let phpFiles = module.exports.getPhpFiles(files);
+        let phpFiles = module.exports.skipDeletedFiles(module.exports.getPhpFiles(files));
+
 
         if (phpFiles.length) {
-            exec('phpcs --encoding=utf-8 ' + module.exports.skipDeletedFiles(phpFiles).join(' '), { stdio: [0, 1, 2] });
+            exec('phpcs --encoding=utf-8 ' + phpFiles.join(' '), { stdio: [0, 1, 2] });
         }
 
         return 0;
