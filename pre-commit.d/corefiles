@@ -13,7 +13,7 @@ module.exports.isCoreFileEdited = (files) => {
         'lib/(Zend|Mage|Varien)',
         'app/design/(adminhtml|frontend)/(base|default)/default',
         'skin/(adminhtml|frontend)/(base|default)/default',
-        'shell/'
+        'shell/(abstract|compiler|indexer|log|scheduler).php'
     ];
 
     files.forEach((file) => {

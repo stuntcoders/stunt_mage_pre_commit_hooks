@@ -50,11 +50,16 @@ describe('pre-commit corefiles tests', () => {
         expect(hook.isCoreFileEdited(['skin/adminhtml/custom-package/default/menu.css'])).toBe(0);
     });
 
-    it('shouldn\'t allow changes shell scripts', () => {
+    it('shouldn\'t allow changes to core shell scripts', () => {
         expect(hook.isCoreFileEdited(['shell/abstract.php'])).toBe(1);
         expect(hook.isCoreFileEdited(['shell/compiler.php'])).toBe(1);
         expect(hook.isCoreFileEdited(['shell/indexer.php'])).toBe(1);
         expect(hook.isCoreFileEdited(['shell/log.php'])).toBe(1);
+    });
+
+    it('should allow changes to custom shell scripts', () => {
+        expect(hook.isCoreFileEdited(['shell/custom.php'])).toBe(0);
+        expect(hook.isCoreFileEdited(['shell/custom2.php'])).toBe(0);
     });
 
     it('should accept local file changes', () => {

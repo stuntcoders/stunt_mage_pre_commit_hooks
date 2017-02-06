@@ -52,6 +52,30 @@ describe('commit-msg tests', () => {
     expect(hook.validateCommitMessage(message)).toBe(0);
   });
 
+  it('should validate everything before verbose separator', () => {
+    let message = [
+      'Commit message title'.repeat(5),
+      '',
+      'Commit message body',
+      '# ------------------------ >8 ------------------------',
+      'Ignore text after verbose separator'.repeat(5)
+    ].join('\n');
+
+    expect(hook.validateCommitMessage(message)).toBe(1);
+  });
+
+  it('should ignore everything after verbose separator', () => {
+    let message = [
+      'Commit message title',
+      '',
+      'Commit message body',
+      '# ------------------------ >8 ------------------------',
+      'Ignore text after verbose separator'.repeat(5)
+    ].join('\n');
+
+    expect(hook.validateCommitMessage(message)).toBe(0);
+  });
+
   it('should allow empty commit message', () => {
     expect(hook.validateCommitMessage('')).toBe(0);
   });
