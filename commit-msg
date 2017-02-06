@@ -34,7 +34,11 @@ module.exports.validateCommitMessage = (message) => {
         errorCode = 1;
     }
 
-    lines.forEach((line) => {
+    lines.some((line) => {
+        if (line === '# ------------------------ >8 ------------------------') {
+            return true;
+        }
+
         if (line && line.charAt(0) !== '#' && line.length > 72) {
             console.error(`Commit message body line is ${line.length} characters long; Limit it to 72 characters`);
             errorCode = 1;
